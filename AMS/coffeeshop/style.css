@@ -1,0 +1,28 @@
+.card-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap:wrap;
+    gap:20px;
+    padding:30px;
+}
+
+.coffee-card{
+    border:none;
+    border-radius: 10px;
+    /* box-shadow: 0px 4px 8px rgba(0,0,0,0.1); */
+    overflow: hidden;
+    width: 300px;
+}
+
+.coffee-card:hover{
+    border: 1px solid rgb(66, 38, 38);
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    
+}
+.btn-danger{
+    background-color: #D39D5F;
+    border:none;
+    padding:10px 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}

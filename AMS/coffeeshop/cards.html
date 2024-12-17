@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coffee Shop Card Design</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJX3m5wzIu7fFCjX0EhsQb1C6uTXm2ZGQONtQ8nd5CB0m+e2B7hBhQqRvmPp" crossorigin="anonymous">
+  <style>
+    /* Card container styling */
+    .card-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 30px;
+    }
+
+    /* Card styling */
+    .coffee-card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 300px;
+    }
+
+    .coffee-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Image styling */
+    .coffee-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    /* Card content styling */
+    .card-body {
+      background-color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .card-text {
+      font-size: 1rem;
+      color: #777;
+      margin-bottom: 20px;
+    }
+
+    /* Button styling */
+    .btn-primary {
+      background-color: #D39D5F;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 1rem;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #A1887F;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="card-container">
+    <!-- Coffee Card 1 -->
+    <div class="card coffee-card">
+      <img src="1.jpg" alt="Cappuccino">
+      <div class="card-body">
+        <h5 class="card-title">Cappuccino</h5>
+        <p class="card-text">A classic espresso-based coffee drink topped with steamed milk and foam.</p>
+        <a href="#" class="btn btn-primary">Order Now</a>
+      </div>
+    </div>
+
+    <!-- Coffee Card 2 -->
+    <div class="card coffee-card">
+      <img src="2.jpg" alt="Latte">
+      <div class="card-body">
+        <h5 class="card-title">Latte</h5>
+        <p class="card-text">A smooth blend of espresso and steamed milk with a hint of foam.</p>
+        <a href="#" class="btn btn-primary">Order Now</a>
+      </div>
+    </div>
+
+    <!-- Coffee Card 3 -->
+    <div class="card coffee-card">
+      <img src="3.jpg" alt="Espresso">
+      <div class="card-body">
+        <h5 class="card-title">Espresso</h5>
+        <p class="card-text">A bold, concentrated shot of espresso to energize your day.</p>
+        <a href="#" class="btn btn-primary">Order Now</a>
+      </div>
+    </div>
+
+    <!-- Coffee Card 4 -->
+    <div class="card coffee-card">
+      <img src="1.jpg" alt="Americano">
+      <div class="card-body">
+        <h5 class="card-title">Americano</h5>
+        <p class="card-text">Espresso diluted with hot water for a rich and smooth taste.</p>
+        <a href="#" class="btn btn-primary">Order Now</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0gF5x1Z8zJ6B7F9B6hSkW7F9t1dfhFbVgeR9yf5lQ6r5ppH7" crossorigin="anonymous"></script>
+</body>
+</html>
