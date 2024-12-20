@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f3eb;
+            margin: 0;
+            color: #333;
+        }
+
+        header {
+            background: #6f4e37;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #6f4e37;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 1rem;
+            background: #6f4e37;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>View Orders</h1>
+    </header>
+
+    <table>
+        <tr>
+            <th>Order ID</th>
+            <th>Name</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>#101</td>
+            <td>John Doe</td>
+            <td>Caramel Macchiato</td>
+            <td>2</td>
+            <td>Processing</td>
+        </tr>
+        <tr>
+            <td>#102</td>
+            <td>Jane Smith</td>
+            <td>Double Chocolate Cookie</td>
+            <td>5</td>
+            <td>Delivered</td>
+        </tr>
+    </table>
+
+    <footer>
+        <p>&copy; 2024 Coffee Hub | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
