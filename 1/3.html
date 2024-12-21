@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firework Words</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: black;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="fireworks"></canvas>
+    <script>
+        const canvas = document.getElementById("fireworks");
+        const ctx = canvas.getContext("2d");
+
+        // Resize canvas to fit the window
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Particle class
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.originX = x;
+                this.originY = y;
+                this.color = color;
+                this.size = Math.random() * 2 + 1; // Larger particles
+                this.angle = Math.random() * 2 * Math.PI;
+                this.speed = Math.random() * 1 + 0.5; // Constrained initial movement
+                this.gravity = 0.05;
+                this.life = 120; // Longer lifespan
+                this.fade = 0.02; // Gradual fade
+            }
+
+            update() {
+                this.x += this.speed * Math.cos(this.angle);
+                this.y += this.speed * Math.sin(this.angle) + this.gravity;
+                this.speed *= 0.98; // Slow down
+                this.life -= this.fade; // Gradual fade
+            }
+
+            draw(ctx) {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+
+            isDead() {
+                return this.life <= 0;
+            }
+        }
+
+        // Generate particles from text
+        function createFireworkWords(text, font, color) {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Set text properties
+            ctx.font = font;
+            ctx.fillStyle = color;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+            // Position text in the center
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+
+            // Draw text offscreen
+            ctx.fillText(text, centerX, centerY);
+
+            // Get pixel data from the text
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+
+            // Clear the canvas for the fireworks animation
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Create particles at visible text pixels
+            const particles = [];
+            for (let y = 0; y < canvas.height; y += 2) { // Increase density by reducing step size
+                for (let x = 0; x < canvas.width; x += 2) {
+                    const index = (y * canvas.width + x) * 4;
+                    if (imageData[index + 3] > 128) { // Check for visible pixel
+                        const color = `hsl(${Math.random() * 360}, 100%, 70%)`; // Brighter particles
+                        particles.push(new Particle(x, y, color));
+                    }
+                }
+            }
+            return particles;
+        }
+
+        // Animate particles
+        let particles = createFireworkWords("AMS LTD", "bold 100px Arial", "white");
+
+        function animate() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.1)"; // Semi-transparent background
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((particle, index) => {
+                particle.update();
+                particle.draw(ctx);
+
+                if (particle.isDead()) {
+                    particles.splice(index, 1); // Remove dead particles
+                }
+            });
+
+            // If all particles are gone, regenerate the fireworks
+            if (particles.length === 0) {
+                particles = createFireworkWords("AMS LTD", "bold 100px Arial", "white");
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Start the animation
+        animate();
+
+        // Resize canvas on window resize
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = createFireworkWords("AMS LTD", "bold 100px Arial", "white");
+        });
+
+    </script>
+</body>
+
+</html>

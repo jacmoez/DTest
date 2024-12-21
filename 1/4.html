@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fireworks with Text</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: black;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="fireworks"></canvas>
+    <script>
+        const canvas = document.getElementById("fireworks");
+        const ctx = canvas.getContext("2d");
+
+        // Resize canvas to fit the window
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Particle class
+        class Particle {
+            constructor(x, y, color, size = 2) {
+                this.x = x;
+                this.y = y;
+                this.size = size;
+                this.color = color;
+                this.angle = Math.random() * 2 * Math.PI;
+                this.speed = Math.random() * 3 + 1;
+                this.life = Math.random() * 50 + 50;
+                this.gravity = 0.05;
+            }
+
+            update() {
+                this.x += this.speed * Math.cos(this.angle);
+                this.y += this.speed * Math.sin(this.angle) + this.gravity;
+                this.speed *= 0.98;
+                this.life -= 1;
+            }
+
+            draw(ctx) {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+
+            isDead() {
+                return this.life <= 0;
+            }
+        }
+
+        // Firework class
+        class Firework {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.particles = [];
+                for (let i = 0; i < 100; i++) {
+                    this.particles.push(new Particle(x, y, color));
+                }
+            }
+
+            update() {
+                this.particles.forEach((particle, index) => {
+                    particle.update();
+                    if (particle.isDead()) {
+                        this.particles.splice(index, 1);
+                    }
+                });
+            }
+
+            draw(ctx) {
+                this.particles.forEach((particle) => particle.draw(ctx));
+            }
+
+            isDead() {
+                return this.particles.length === 0;
+            }
+        }
+
+        // Firework array
+        let fireworks = [];
+
+        // Random fireworks generator
+        function generateFirework() {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height / 2; // Fireworks in the upper half
+            const color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+            fireworks.push(new Firework(x, y, color));
+        }
+
+        // Draw static text
+        function drawText() {
+            ctx.font = "bold 100px Arial";
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+            gradient.addColorStop(0, "red");
+            gradient.addColorStop(0.5, "green");
+            gradient.addColorStop(1, "gold");
+            ctx.fillStyle = gradient;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText("MERRY CHRISTMAS", canvas.width / 2, canvas.height / 2);
+
+            // Optional: Add glow effect
+            ctx.shadowColor = "white";
+            ctx.shadowBlur = 20;
+            ctx.fillText("MERRY CHRISTMAS", canvas.width / 2, canvas.height / 2);
+        }
+
+        // Animate fireworks and text
+        function animate() {
+            // Clear canvas with transparency for trailing effect
+            ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Update and draw fireworks
+            fireworks.forEach((firework, index) => {
+                firework.update();
+                firework.draw(ctx);
+
+                if (firework.isDead()) {
+                    fireworks.splice(index, 1);
+                }
+            });
+
+            // Generate new fireworks
+            if (Math.random() < 0.05) {
+                generateFirework();
+            }
+
+            // Draw text
+            drawText();
+
+            requestAnimationFrame(animate);
+        }
+
+        // Start the animation
+        animate();
+
+        // Resize canvas on window resize
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+    </script>
+</body>
+
+</html>
