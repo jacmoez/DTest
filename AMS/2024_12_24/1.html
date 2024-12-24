@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .page-container{
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background: #E7F3F1;
+            border:0.5em solid white;
+            padding: 2em;
+            gap:1em;
+        }
+        .card-data{
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-radius: 15px;
+            background-color: white;
+            padding: 1.5em;
+            box-shadow: 0 1.5em 2.5em -0.5em rgba(0,0,0,0.1);
+            transition: transform 0.45 ease , background 0.45 ease;
+        }
+
+        .card-data h3{
+            color: #2e2e2e;
+            font-size: 2.5em;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 0.5em;
+            transition: color 0.45s ease border 0.45s ease;
+
+        }
+        .card-data h4{
+            color:#627084;
+            text-transform: uppercase;
+            font-size: 1em;
+            font-weight: 700;
+            line-height: 1.5;
+            letter-spacing: 0.1em;
+            margin-bottom: 1em;
+            transition: color 0.45s ease;
+        }
+        .card-data p{
+            opacity: 0;
+            color:#FFF;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 1em;
+            transform: translateY(-1em);
+            transition: opacity 0.5s ease,transform 0.5s ease;
+        }
+        .card-data span{
+            margin-top: auto;
+            color: orange;
+            font-size: 1em;
+            font-weight: 600;
+            transition: color 0.45s ease;
+        }
+        .card-data:hover{
+            background-color: orange;
+            transform: scale(1.05);
+        }
+        .card-data:hover h3{
+            color:#FFF;
+            border-bottom:2px solid #EEE ;
+        }
+        .card-data:hover h4{
+            color:#000;
+        }
+        .card-data:hover p{
+            opacity: 1;
+            transform: none;
+            color: #000;
+        }
+        .card-data:hover span{
+            color:#FFF;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="page-container">
+        <a href="#" class="card-data">
+            <h3>Java Prgramming</h3>
+            <h4>Java SE</h4>
+            <p>This is description for java programming</p>
+            <span>
+                View Courses > >
+            </span>
+        </a>
+    </section>
+
+</body>
+</html>

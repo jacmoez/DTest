@@ -22,20 +22,7 @@
             font-weight: bold;
         }
 
-        #coffee-link:active {
-            color: black;
-            background-color: orange;
-        }
-
-        #tea-link:active {
-            color: black;
-            background-color: cyan;
-        }
-
-        #cookie-link:active {
-            color: black;
-            background-color: blueviolet;
-        }
+       
 
         .about {
             position: fixed;
@@ -135,11 +122,11 @@
         <a href="#coffee" id="coffee-link" class="active">Coffee</a>
         <a href="#tea" id="tea-link">Tea</a>
         <a href="#cookie" id="cookie-link">Cookie</a>
-        
+
     </div>
 
     <!-- coffee section -->
-    <div id="coffee" class="mt-5">
+    <div id="coffee" class="mt-5" >
         <h2 class="text-center">Coffee</h2>
         <div class="content ms-5" id="coffee">
             <div class="card">
@@ -212,7 +199,7 @@
 
 
     <!-- coffee section -->
-    <div id="tea" class="mt-5">
+    <div id="tea" class="mt-5" >
         <h2 class="text-center mt-5">Tea</h2>
         <div class="content ms-5">
             <div class="card">
@@ -355,39 +342,59 @@
     </div>
 
     <script>
-        // document.querySelectorAll(".about a").forEach(link=>{
-        //     link.addEventListener("click",function(e){
-        //         e.preventDefault();
-        //         document.querySelectorAll(".about a").forEach(link=>{
-        //             link.classList.remove("active")
-        //         })
-        //     })
-        //     this.classList.add("active");
-        //     const targetId=this.getAttribute("href").substring(1);
-        //     const targetSection=document.getElementById(targetId);
-        //     if(targetSection){
-        //         targetSection.scrollIntoView({behavior:"smooth"})
-        //     }
-        // })
-        document.querySelectorAll(".about a").forEach((link) => {
+        document.querySelectorAll(".about a").forEach(link => {
             link.addEventListener("click", function (e) {
                 e.preventDefault();
-                // Remove 'active' class from all links
-                document.querySelectorAll(".about a").forEach((link) => {
-                    link.classList.remove("active");
-                });
-
-                // Add 'active' class to the clicked link
+                document.querySelectorAll(".about a").forEach(link => {
+                    link.classList.remove("active")
+                })
                 this.classList.add("active");
-
-                // Scroll to the target section
                 const targetId = this.getAttribute("href").substring(1);
                 const targetSection = document.getElementById(targetId);
                 if (targetSection) {
-                    targetSection.scrollIntoView({ behavior: "smooth" });
+                    targetSection.scrollIntoView({ behavior: "smooth" })
                 }
-            });
-        });
+            })
+
+        })
+        
+        //scroll
+        window.addEventListener('scroll',function(){
+            console.log("Here is in scroll")
+            const coffeeSection=document.getElementById("coffee");
+            const teaSection=document.getElementById("tea");
+            const cookieSection=document.getElementById("cookie");
+
+            const coffeeLink=document.getElementById("coffee-link");
+            const teaLink=document.getElementById("tea-link");
+            const cookieLink=document.getElementById("cookie-link");
+
+            const isInViewport=(section)=>{
+                const position=section.getBoundingClientRect();
+                return position.top<window.innerHeight/2 && position.bottom>window.innerHeight/2;
+            }
+
+            if(isInViewport(coffeeSection)){
+                coffeeLink.classList.add("active")
+                teaLink.classList.remove("active")
+                cookieLink.classList.remove("active")
+            }
+            else if(isInViewport(teaSection)){
+                coffeeLink.classList.remove("active")
+                teaLink.classList.add("active")
+                cookieLink.classList.remove("active")
+            }
+            else if(isInViewport(cookieSection)){
+                coffeeLink.classList.remove("active")
+                teaLink.classList.remove("active")
+                cookieLink.classList.add("active")
+            }else{
+                coffeeLink.classList.remove("active")
+                teaLink.classList.remove("active")
+                cookieLink.classList.remove("active") 
+            }
+        })
+
 
     </script>
 
